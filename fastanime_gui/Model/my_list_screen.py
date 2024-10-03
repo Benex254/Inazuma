@@ -1,6 +1,7 @@
-from ...libs.anilist.anilist import AniList
-from ...Utility.show_notification import show_notification
+from fastanime.anilist import AniList
+
 from ..Utility.media_card_loader import media_card_loader
+from ..Utility.show_notification import show_notification
 from .base_model import BaseScreenModel
 
 

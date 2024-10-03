@@ -1,21 +1,21 @@
 [tool.poetry]
 name = "fastanime-gui"
 version = "0.1.0"
-description = "A gui wrapper for for fastanime"
-authors = ["Benex254 <benedictx855@gmail.com>"]
+description = "A gui wrapper over fastanime"
+authors = ["Benex254 <benextempest@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
+fastanime = "^2.5.3"
 Kivy = "^2.3.0"
-kivymd = "2.0.0"
-fastanime = "^0.31.0"
-yt-dlp = "^2024.7.25"
+yt-dlp = "^2024.9.27"
+kivymd = { url = "https://github.com/kivymd/KivyMD/archive/master.zip" }
 
 [tool.poetry.group.dev.dependencies]
-ruff = "^0.5.5"
-isort = "^5.13.2"
+pyright = "^1.1.382.post1"
+ruff = "^0.6.8"
 
 [build-system]
 requires = ["poetry-core"]

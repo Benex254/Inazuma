@@ -3,8 +3,8 @@ from inspect import isgenerator
 from kivy.clock import Clock
 from kivy.logger import Logger
 
-from ...Utility.show_notification import show_notification
 from ..Model.home_screen import HomeScreenModel
+from ..Utility.show_notification import show_notification
 from ..View.components.media_card.media_card import MediaCardsContainer
 from ..View.HomeScreen.home_screen import HomeScreenView
 

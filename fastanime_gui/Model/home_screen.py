@@ -1,4 +1,5 @@
-from ...libs.anilist.anilist import AniList
+from fastanime.anilist import AniList
+
 from ..Utility.media_card_loader import media_card_loader
 from .base_model import BaseScreenModel
 
@@ -67,7 +68,7 @@ class HomeScreenModel(BaseScreenModel):
             return data
 
     def get_upcoming_anime(self):
-        success, data = AniList.get_upcoming_anime(1)
+        success, data = AniList.get_upcoming_anime()
         if success:
 
             def _data_generator():

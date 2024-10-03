@@ -1,10 +1,10 @@
-from fuzzywuzzy import fuzz
+from fastanime.anilist import AniList
+from fastanime.AnimeProvider import AnimeProvider
+from fastanime.Utility.data import anime_normalizer
 from kivy.cache import Cache
 from kivy.logger import Logger
+from thefuzz import fuzz
 
-from ...libs.anilist.anilist import AniList
-from ...libs.anime_provider.allanime.api import anime_provider
-from ...Utility.data import anime_normalizer
 from .base_model import BaseScreenModel
 
 
@@ -36,6 +36,8 @@ def anime_title_percentage_match(
 
 Cache.register("streams.anime", limit=10)
 
+anime_provider = AnimeProvider("allanime")
+
 
 class AnimeScreenModel(BaseScreenModel):
     """the Anime screen model"""
@@ -56,13 +58,13 @@ class AnimeScreenModel(BaseScreenModel):
             )
 
             if search_results:
-                _search_results = search_results["shows"]["edges"]
+                _search_results = search_results["results"]
                 result = max(
                     _search_results,
-                    key=lambda x: anime_title_percentage_match(x["name"], anime_title),
+                    key=lambda x: anime_title_percentage_match(x["title"], anime_title),
                 )
-                self.current_anime_id = result["_id"]
-                self.current_anime_data = anime_provider.get_anime(result["_id"])
+                self.current_anime_id = result["id"]
+                self.current_anime_data = anime_provider.get_anime(result["id"])
                 self.current_title = anime_title
                 return self.current_anime_data
             return {}
@@ -79,28 +81,10 @@ class AnimeScreenModel(BaseScreenModel):
             ):
                 return cached_episode
             if self.current_anime_data:
-                episode_streams = anime_provider.get_anime_episode(
+                streams = anime_provider.get_episode_streams(
                     self.current_anime_id, episode, translation_type
                 )
-                streams = anime_provider.get_episode_streams(episode_streams)
 
-                if streams:
-                    _streams = list(streams)
-                    streams = []
-                    for stream in _streams:
-                        streams.append(
-                            {
-                                f"{stream[0]}": [
-                                    _stream["link"] for _stream in stream[1]["links"]
-                                ]
-                            }
-                        )
-                        Cache.append(
-                            "streams.anime",
-                            f"{self.current_title}{episode}{is_dub}",
-                            streams,
-                        )
-                return streams
             return []
         except Exception as e:
             Logger.info("anime_screen error: %s" % e)

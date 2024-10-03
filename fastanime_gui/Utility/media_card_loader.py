@@ -1,9 +1,9 @@
 import yt_dlp
+from fastanime.libs.anilist.types import AnilistBaseMediaDataSchema
 from kivy.cache import Cache
 from kivy.logger import Logger
 
-from ...libs.anilist.anilist_data_schema import AnilistBaseMediaDataSchema
-from ...Utility import anilist_data_helper
+from ..Utility import anilist_data_helper
 from . import user_data_helper
 
 Cache.register("trailer_urls.anime", timeout=360)
@@ -120,17 +120,17 @@ class MediaCardDataLoader(object):
 
         return video_url
 
-    def get_trailer_from_pytube(self, trailer_url, anime):
+    def get_trailer_from_yt_dlp(self, trailer_url, anime):
         if trailer := Cache.get("trailer_urls.anime", trailer_url):
             return trailer
         try:
             trailer = self._get_stream_link(trailer_url)
-            Logger.info(f"Pytube Success:For {anime}")
-            if trailer:
-                Cache.append("trailer_urls.anime", trailer_url, trailer)
+            Logger.info(f"yt-dlp Success:For {anime}")
+            # if trailer:
+            # Cache.append("trailer_urls.anime", trailer_url, trailer)
             return trailer
         except Exception as e:
-            Logger.error(f"Pytube Failure:For {anime} reason: {e}")
+            Logger.error(f"Yt-dlp Failure:For {anime} reason: {e}")
             return ""
 
 

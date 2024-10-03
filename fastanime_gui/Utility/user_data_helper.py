@@ -4,10 +4,9 @@ Contains Helper functions to read and write the user data files
 
 from datetime import date, datetime
 
+from fastanime.constants import USER_DATA_PATH
 from kivy.logger import Logger
 from kivy.storage.jsonstore import JsonStore
-
-from ... import USER_DATA_PATH
 
 today = date.today()
 now = datetime.now()

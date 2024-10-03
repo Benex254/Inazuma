@@ -1,5 +1,6 @@
 from kivy.animation import Animation
 from kivy.clock import Clock
+from kivy.factory import Factory
 from kivy.properties import ObjectProperty
 from kivy.uix.modalview import ModalView
 from kivy.utils import QueryDict
@@ -10,6 +11,10 @@ from kivymd.uix.behaviors import (
     HoverBehavior,
     StencilBehavior,
 )
+
+from .media_player import MediaPopupVideoPlayer
+
+Factory.register("MediaPopupVideoPlayer", MediaPopupVideoPlayer)
 
 
 class MediaPopup(

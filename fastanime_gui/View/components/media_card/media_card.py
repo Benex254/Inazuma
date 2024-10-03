@@ -126,7 +126,7 @@ class MediaCard(HoverBehavior, MDBoxLayout):
             # trailer stuff
             from ....Utility.media_card_loader import media_card_loader
 
-            if trailer_url := media_card_loader.get_trailer_from_pytube(
+            if trailer_url := media_card_loader.get_trailer_from_yt_dlp(
                 trailer, self.title
             ):
                 self.trailer_url = trailer_url
