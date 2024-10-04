@@ -22,6 +22,7 @@ class AnimeScreenView(BaseScreenView):
     """The anime screen view"""
 
     current_anilist_data: "AnilistBaseMediaDataSchema | None" = None
+    current_server = ObjectProperty()
     current_link = StringProperty()
     current_servers = ListProperty([])
     current_anime_data = ObjectProperty()
@@ -31,7 +32,7 @@ class AnimeScreenView(BaseScreenView):
     total_episodes = 0
     current_episode = 1
     video_player = ObjectProperty()
-    current_server = "dropbox"
+    current_server_name = "dropbox"
     is_dub = ObjectProperty()
 
     def __init__(self, **kwargs):
@@ -65,7 +66,7 @@ class AnimeScreenView(BaseScreenView):
     def on_current_anime_data(self, instance, value):
         self.update_episodes(value["availableEpisodesDetail"]["sub"][::-1])
         self.current_episode = int("1")
-        self.update_current_video_stream(self.current_server)
+        self.update_current_video_stream(self.current_server_name)
         self.video_player.state = "play"
 
     def update_current_episode(self, episode):
@@ -73,16 +74,17 @@ class AnimeScreenView(BaseScreenView):
         self.controller.fetch_streams(
             self.current_anilist_data, self.is_dub.active, episode
         )
-        self.update_current_video_stream(self.current_server)
+        self.update_current_video_stream(self.current_server_name)
         self.video_player.state = "play"
 
     def update_current_video_stream(self, server_name, is_dub=False):
         for server in self.current_servers:
             if server["server"] == server_name:
-                self.current_server = server["server"]
+                self.current_server = server
+                self.current_server_name = server["server"]
                 self.current_link = server["links"][0]["link"]
                 self.video_player.state = "play"
-                logger.debug(f"found {self.current_server} server")
+                logger.debug(f"found {self.current_server_name} server")
                 logger.debug(f"found {self.current_link} link")
                 break
             else:

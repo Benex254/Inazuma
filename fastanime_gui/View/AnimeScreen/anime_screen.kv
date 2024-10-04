@@ -49,7 +49,7 @@
                 MDIconButton:
                     icon:"download"
                     on_press: 
-                        if root.current_link: app.download_anime_video(root.current_link,(root.current_title[0],root.current_episode))
+                        if root.current_link: app.download_anime_video(root.current_link,root.current_title,root.current_server)
                 MDButton:
                     on_press: 
                         if root.current_link: app.play_on_mpv(root.current_link)

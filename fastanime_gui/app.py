@@ -16,7 +16,9 @@ import os
 
 os.environ["FASTANIME_PROVIDER"] = "allanime"
 import random
+from typing import TYPE_CHECKING
 
+from fastanime.constants import USER_VIDEOS_DIR
 from kivy.resources import resource_find
 from kivy.uix.screenmanager import FadeTransition, ScreenManager
 from kivy.uix.settings import SettingsWithSidebar
@@ -24,6 +26,9 @@ from kivymd.app import MDApp
 
 from .View.components.media_card.media_card import MediaPopup
 from .View.screens import screens
+
+if TYPE_CHECKING:
+    from fastanime.libs.anime_provider.types import Server
 
 # from .Utility.data import themes_available
 # from .View.screens import screens
@@ -130,8 +135,14 @@ class FastAnime(MDApp):
         self.anime_screen.controller.update_anime_view(anilist_data, caller_screen_name)
 
     #
-    # def download_anime_video(self, url: str, anime_title: tuple):
-    #     self.download_screen.new_download_task(anime_title)
-    #     show_notification("New Download", f"{anime_title[0]} episode: {anime_title[1]}")
-    #     progress_hook = self.download_screen.on_episode_download_progress
-    #     downloader.download_file(url, anime_title, progress_hook)
+    def download_anime_video(self, url: str, anime_title, anime_server: "Server"):
+        from fastanime.Utility.downloader.downloader import downloader
+
+        from .Utility.show_notification import show_notification
+
+        self.download_screen.new_download_task(anime_title)
+        show_notification("New Download", f"{anime_title[0]} episode: {anime_title[1]}")
+        progress_hook = self.download_screen.on_episode_download_progress
+        downloader.download_file(
+            url, anime_title, anime_server["episode_title"], USER_VIDEOS_DIR
+        )
