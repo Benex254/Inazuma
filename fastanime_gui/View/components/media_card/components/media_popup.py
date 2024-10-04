@@ -49,6 +49,7 @@ class MediaPopup(
                 "cover_image_url": "",
                 "preview_image": "",
                 "has_trailer_color": [0, 0, 0, 0],
+                "anilist_data": {},
             }
         )
     )

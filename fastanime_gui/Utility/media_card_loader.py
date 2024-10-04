@@ -17,6 +17,7 @@ class MediaCardDataLoader(object):
         anime_item: AnilistBaseMediaDataSchema,
     ):
         media_card_data = {}
+        media_card_data["anilist_data"] = anime_item
         media_card_data["viewclass"] = "MediaCard"
         media_card_data["anime_id"] = anime_id = anime_item["id"]
 
@@ -126,8 +127,8 @@ class MediaCardDataLoader(object):
         try:
             trailer = self._get_stream_link(trailer_url)
             Logger.info(f"yt-dlp Success:For {anime}")
-            # if trailer:
-            # Cache.append("trailer_urls.anime", trailer_url, trailer)
+            if trailer:
+                Cache.append("trailer_urls.anime", trailer_url, trailer)
             return trailer
         except Exception as e:
             Logger.error(f"Yt-dlp Failure:For {anime} reason: {e}")

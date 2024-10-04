@@ -15,6 +15,7 @@ from .components.media_popup import MediaPopup
 
 
 class MediaCard(HoverBehavior, MDBoxLayout):
+    anilist_data = ObjectProperty()
     screen = ObjectProperty()
     anime_id = NumericProperty()
     title = StringProperty()

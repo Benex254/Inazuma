@@ -12,6 +12,7 @@ fastanime = "^2.5.3"
 Kivy = "^2.3.0"
 yt-dlp = "^2024.9.27"
 kivymd = { url = "https://github.com/kivymd/KivyMD/archive/master.zip" }
+ffpyplayer = "^4.5.1"
 
 [tool.poetry.group.dev.dependencies]
 pyright = "^1.1.382.post1"

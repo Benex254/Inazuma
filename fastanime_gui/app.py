@@ -125,14 +125,10 @@ class FastAnime(MDApp):
     #         updated_list.remove(id)
     #     user_data_helper.update_user_anime_list(updated_list)
     #
-    def show_anime_screen(self, id: int, title, caller_screen_name: str):
+    def show_anime_screen(self, anilist_data, caller_screen_name: str):
         self.manager_screens.current = "anime screen"
-        self.anime_screen.controller.update_anime_view(id, title, caller_screen_name)
+        self.anime_screen.controller.update_anime_view(anilist_data, caller_screen_name)
 
-    # def play_on_mpv(self, anime_video_url: str):
-    #     if mpv_player.mpv_process:
-    #         mpv_player.stop_mpv()
-    #     mpv_player.run_mpv(anime_video_url)
     #
     # def download_anime_video(self, url: str, anime_title: tuple):
     #     self.download_screen.new_download_task(anime_title)

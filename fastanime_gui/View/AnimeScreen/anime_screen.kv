@@ -28,11 +28,11 @@
             MDIconButton:
                 icon:"arrow-left"
                 on_press:root.manager_screens.current = root.caller_screen_name
-           
         MDBoxLayout:
             VideoPlayer:
                 id:video_player
                 source:root.current_link
+                auto_play:True
         AnimeBoxLayout:
             padding: "20dp"
             radius:5
@@ -92,6 +92,12 @@
                             pl.selected_segments = [self]
                         MDSegmentButtonLabel:
                             text:"weTransfer"
+                    MDSegmentedButtonItem:
+                        on_active:
+                            root.update_current_video_stream("Yt")
+                            pl.selected_segments = [self]
+                        MDSegmentButtonLabel:
+                            text:"Yt"
             MDDivider:
 
             MDRecycleView:
@@ -107,4 +113,3 @@
                     default_size_hint:0,0
                     default_size:30,30
                     default_pos_hint:{"center_y":0.5,"center_x":0.5}
-                     
