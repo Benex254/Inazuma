@@ -34,7 +34,7 @@ if TYPE_CHECKING:
 # from .View.screens import screens
 
 
-class FastAnime(MDApp):
+class Inazuma(MDApp):
     default_anime_image = resource_find(random.choice(["default_1.jpg", "default.jpg"]))
     default_banner_image = resource_find(random.choice(["banner_1.jpg", "banner.jpg"]))
 
@@ -146,3 +146,7 @@ class FastAnime(MDApp):
         downloader.download_file(
             url, anime_title, anime_server["episode_title"], USER_VIDEOS_DIR
         )
+
+
+def main():
+    Inazuma().run()

@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "fastanime-gui"
+name = "inazuma"
 version = "0.1.0"
 description = "A gui wrapper over fastanime"
 authors = ["Benex254 <benextempest@gmail.com>"]
@@ -17,6 +17,9 @@ ffpyplayer = "^4.5.1"
 [tool.poetry.group.dev.dependencies]
 pyright = "^1.1.382.post1"
 ruff = "^0.6.8"
+
+[tool.poetry.scripts]
+inazuma = 'inazuma:main'
 
 [build-system]
 requires = ["poetry-core"]
