@@ -1,2 +1,3 @@
-# FastAnime-GUI
+# Inazuma
+
 Kivy gui wrapper over fastanime
